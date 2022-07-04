@@ -1,7 +1,7 @@
 #include <iostream>
 
 // set arr elements to a value
-// Time: 
+// Time: O(n)
 // memset (void * ptr, int value, size_t num);
     // ptr: pointer to block of memory to fill
     // value: to set 
@@ -9,3 +9,4 @@
 memset(arr, 0, sizeof(arr));
 
 // substr (void)
+// Time: 
