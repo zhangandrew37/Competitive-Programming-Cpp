@@ -9,4 +9,4 @@
 memset(arr, 0, sizeof(arr));
 
 // substr (void)
-// Time: 
+// Time: O
