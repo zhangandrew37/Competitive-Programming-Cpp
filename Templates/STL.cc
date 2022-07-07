@@ -1,4 +1,6 @@
 #include <iostream>
+#include <map>
+#include<vector>
 
 // set arr elements to a value
 // Time: O(n)
@@ -10,3 +12,14 @@ memset(arr, 0, sizeof(arr));
 
 // substr (void)
 // Time: O
+
+// ----  map (ordered) --- 
+map<string, int> m;
+
+//setting:
+
+
+// iterating
+for (auto &p : m){
+    cout << p.first << p.second << endl;
+}
