@@ -4,9 +4,11 @@ public:
         vector<vector<int>> res;
         int len = nums.size();
         sort(nums.begin(), nums.end());
+        
         for (int i = 0; i < len-2; i++){
             //sorted array, skip those behind
             if (i != 0 && nums[i] == nums[i-1]) continue;
+            if (nums[i] > 0) break;
             int target = 0 - nums[i];
             unordered_map<int, int>m;
             
