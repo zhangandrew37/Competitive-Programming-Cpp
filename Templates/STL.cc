@@ -42,3 +42,58 @@ unordered_map<int, int> m;
 
 // insert
 m.insert(pair<int, int>(nums[i], i));
+
+// ---- vector ----
+vector<int> v = {1,2,3};
+
+// sort
+sort(v.begin(), v.end());
+
+// ---- LinkedList ----
+// - remember to initialize values
+// - memory management
+// - check nullptr
+
+// traversal:
+struct node *tmp = head;
+while (tmp != nullptr){
+    cout << tmp->data << endl;
+    tmp = tmp->next;
+}
+
+//addToFront (n):
+struct node *tmp = new node;
+tmp->data = n;
+tmp->next = head;
+head = tmp;
+
+//addToPos(pos, n):
+struct node *newNode = new node;
+newNode->data = n;
+
+struct node *tmp = head;
+for (int i = 1; i < pos; i++){
+    if (tmp->next != nullptr){
+        tmp = tmp->next;
+    }
+}
+
+newNode->next = tmp->next;
+tmp->next = newNode;
+
+//deleteFromPos(pos):
+ node *ret = head;
+for (int i = 1; i < pos; i++){ // finding prev
+    if (head->next != nullptr){
+        head = head->next;
+    }
+}
+
+node *next = head->next->next;
+delete(head->next);
+head->next = next;
+
+//delete Linkedlist
+while (head != nullptr){
+    head = head->next;
+}
