@@ -5,23 +5,31 @@ public:
         int len = nums.size();
         sort(nums.begin(), nums.end());
         
-        for (int i = 0; i < len-2; i++){
+        for (int i = 0; i < len; i++){
             //sorted array, skip those behind
             if (i != 0 && nums[i] == nums[i-1]) continue;
-            if (nums[i] > 0) break;
             int target = 0 - nums[i];
             unordered_map<int, int>m;
             
-            for (int j = i + 1; j < len; j++){
-                int diff = target - nums[j];
-                // [ 0, 0, 0, 0]
-                if (m.find(diff) != m.end()){
-                    while (j != i + 1 && j != len - 1 && nums[j+1] == nums[j]) j++;
-                    vector<int> tmp = {nums[i], nums[j], diff};
-                    res.push_back(tmp);
+            int l = i + 1, r = len - 1;
+            
+            while (l < r){
+                int sum = nums[i] + nums[l] + nums[r];
+                if (sum > 0){
+                    r --;
+                } else if (sum < 0){
+                    l++;
+                } else {
+                    vector<int> triplet = {nums[i], nums[l], nums[r]};
+                    res.push_back(triplet);
+                    l++;
+                    // skip duplicates
+                    while (nums[l] == nums[l - 1] && l < r) {
+                        l++;
+                    }
                 }
-                m.insert(pair<int, int>(nums[j], j));
-            }
+            
+        }
         }
 
         return res;
