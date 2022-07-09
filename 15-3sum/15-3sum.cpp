@@ -5,13 +5,14 @@ public:
         int len = nums.size();
         sort(nums.begin(), nums.end());
         
-        for (int i = 0; i < len; i++){
+        for (int i = 0; i < len - 2; i++){
+            
             //sorted array, skip those behind
             if (i != 0 && nums[i] == nums[i-1]) continue;
-            int target = 0 - nums[i];
-            unordered_map<int, int>m;
             
-            int l = i + 1, r = len - 1;
+            int target = -nums[i];            
+            int l = i + 1;
+            int r = len - 1;
             
             while (l < r){
                 int sum = nums[i] + nums[l] + nums[r];
