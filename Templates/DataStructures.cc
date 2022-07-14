@@ -72,3 +72,5 @@ stack1.swap(stack2);
 // ---- Deque ----
 // double ended queue (expansion and contraction on both ends)
 // more efficient in case of insertion and deltion of elements at beginning/end compared to vectors
+
+//Queue
