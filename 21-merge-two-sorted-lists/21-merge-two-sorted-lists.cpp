@@ -13,16 +13,28 @@ public:
     
     // recursive
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        if (!list1) return list2;
-        if (!list2) return list1;
         
-        if (list1->val <= list2->val){
-            list1->next = mergeTwoLists(list1->next, list2);
-            return list1;
+        ListNode *res, *tmp;
+        res = new ListNode();
+        tmp = res;
+        
+        while (list1 && list2){
+            if (list1->val < list2->val){
+                tmp->next = list1;
+                list1 = list1->next;
+            } else{
+                tmp->next = list2;
+                list2 = list2->next;
+            }
+            tmp = tmp->next;
         }
         
-        list2->next = mergeTwoLists(list1, list2->next);
-        return list2;
+        if (list1) tmp->next = list1;
+        if (list2) tmp->next = list2;
+        
+        tmp = res->next;
+        delete res;
+        return tmp;
         
     }
 };
