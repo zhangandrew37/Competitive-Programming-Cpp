@@ -1,3 +1,5 @@
+// General use:
+
 int l = 0;
 for (int r = 0; r < n; r++) {
   // add the new thing you found at r
