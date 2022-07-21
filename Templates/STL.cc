@@ -61,7 +61,7 @@ if (s.length() == 0)
       //or
 if (s.size() == 0)
 
-// Algorithms
+// Algorithms  
 
 // ---- for_each ----
 // - applies function fn to each element in range [first, last]
