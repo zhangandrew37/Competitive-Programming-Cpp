@@ -29,3 +29,6 @@ public:
         
     }
 };
+
+// soln 1: hashmap (not O(1) space)
+// soln 2: 2 pointers (O(1) space)
