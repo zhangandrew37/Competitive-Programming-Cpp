@@ -1,13 +1,16 @@
 class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
-        unordered_set<int> prevNums;
+        unordered_map<int, int> frq;
         for (int n : nums){
-            if (prevNums.find(n) != prevNums.end()){
+            frq[n]++;
+            if (frq[n] >= 2){
                 return true;
             }
-            prevNums.insert(n);
         }
         return false;
     }
 };
+
+// solution 1: unordered set (hashmap)
+// solution 2: frequency array
