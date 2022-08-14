@@ -1,23 +1,25 @@
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
+                
+        vector<int> answer;
+        int prefix = 1;
+        int postfix = 1;
         int len = nums.size();
-        vector<int> prefix;
-        vector<int> postfix;
-        prefix.push_back(1);
-        postfix.push_back(1);
         
         for (int i = 0; i < len; i++){
-            prefix.push_back(nums[i]*prefix[i]);
-            postfix.push_back(nums[len - i - 1]*postfix[i]);
+            answer.push_back(prefix);
+            prefix *= nums[i];
         }
         
-        vector<int> answer;
-        for (int i = 0; i < len; i++){
-            answer.push_back(prefix[i]*postfix[len-i-1]);
+        for (int i = len - 1; i >= 0; i--){
+            answer[i] *= postfix;
+            postfix *= nums[i];
+            cout << i << endl;
         }
         return answer;
     }
 };
 
-// nums: 
+// solution 1: prefix and postfix array (not O(1) space)
+// solution 2: store prefix and postfix in variables (O(1) space)
