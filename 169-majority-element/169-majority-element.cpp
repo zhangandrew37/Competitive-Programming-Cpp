@@ -21,4 +21,5 @@ public:
     }
 };
 
-// 
+// solution 1: use frequency array (not O(1) space)
+// solution 2: store in variables, incremenet/decremenet (O(1) space)
