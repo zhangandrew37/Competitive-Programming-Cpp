@@ -10,25 +10,28 @@ public:
                 i++;
                 if (i == len) return res;
             }
-            int target = 0 - nums[i];
-            unordered_set<int> prevNums;
-            for (int j = i+1; j < len; j++){
-                
-                int diff = target - nums[j];
-                if (prevNums.find(diff) != prevNums.end()){
-                    vector<int> triplet{nums[i], nums[j], diff};
-                    res.push_back(triplet);
-                    while (j < len -1 && nums[j+1] == nums[j]) j++;
-                }
-                prevNums.insert(nums[j]);
-            }
+            int l = i + 1, r = len - 1;
+            
+             while (l < r){ 
+                 int sum = nums[i] + nums[l] + nums[r];
+                 if (sum == 0){
+                     res.push_back({nums[i], nums[l], nums[r]});
+                     l++;
+                     while (nums[l] == nums[l-1] && l < r){
+                        l++;
+                    }
+                 } else if (sum < 0){
+                     l++;
+                 } else {
+                     r--;
+                 }
+             }
+            
         }
         
         return res;
-        
-        
     }
 };
 
-// soln 1: hashmap (not O(1) space)
-// soln 2: 2 pointers (O(1) space)
+// soln 1: hashmap (requires more space and time)
+// soln 2: 2 pointers (sliding window)
