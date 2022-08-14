@@ -12,13 +12,8 @@ public:
             postfix.push_back(nums[len - i - 1]*postfix[i]);
         }
         
-        for (int i = 0; i <= len; i++){
-            cout << "i: " << i << " " << prefix[i] << " " << postfix[i] << endl;
-        }
-        
         vector<int> answer;
         for (int i = 0; i < len; i++){
-            cout << i << endl;
             answer.push_back(prefix[i]*postfix[len-i-1]);
         }
         return answer;
