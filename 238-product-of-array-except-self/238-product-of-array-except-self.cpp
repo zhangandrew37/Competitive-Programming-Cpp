@@ -15,7 +15,6 @@ public:
         for (int i = len - 1; i >= 0; i--){
             answer[i] *= postfix;
             postfix *= nums[i];
-            cout << i << endl;
         }
         return answer;
     }
