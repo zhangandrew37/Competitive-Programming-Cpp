@@ -40,4 +40,7 @@ case 1:
  
  [6,7]
  - here, newInterval[0] > curInterval[1], we can insert it here
+ 
+ case 3: 
+ else
 */
