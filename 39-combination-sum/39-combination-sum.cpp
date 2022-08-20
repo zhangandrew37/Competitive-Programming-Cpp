@@ -8,9 +8,7 @@ public:
         if (sum == target){
             combinations.push_back(curCombinations);
             return;
-        } else if (sum > target){
-            return;
-        } else {
+        } else if (sum < target){
             for (int i = start; i < candidates.size(); i++){
                 curCombinations.push_back(candidates[i]);
                 backtrack(candidates, target, sum + candidates[i], curCombinations, i);
@@ -31,5 +29,8 @@ public:
 
 // create a tree
 // if any path is greater than target, then we consider that invalid
-// iterative vs recursive approach (more time efficient, n^m)
-// need to use backtracking to print all solution
+// backtracking (recursive, also iterates) - need to use backtracking to print all solution
+// consider duplicates by passing i + 1 or i depending on solution method
+
+// solution 1: for loop in else case, pass i 
+// solution 2: don't need for loop, just use i
