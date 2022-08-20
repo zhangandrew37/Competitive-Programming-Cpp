@@ -6,11 +6,10 @@ public:
     }
     
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        int len = intervals.size();
         sort (intervals.begin(), intervals.end(), compare);
         vector<vector<int>> res;
         vector<int> cur = intervals[0];
-        for (int i = 0; i < len - 1; i++){
+        for (int i = 0; i < intervals.size() - 1; i++){
             // CASE 1: non-overlapping
             if (cur[1] < intervals[i + 1][0]){
                 res.push_back(cur);
