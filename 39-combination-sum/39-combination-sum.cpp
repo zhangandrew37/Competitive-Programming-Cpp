@@ -5,12 +5,11 @@ public:
     
     void backtrack(vector<int>& candidates, int target, int sum, vector<int>& curCombinations, int start) {
         
-        
-        for (int i = start; i < candidates.size(); i++){
-            if (sum == target){
-              combinations.push_back(curCombinations);
-                return;  
-            } else if (sum < target){
+        if (sum == target){
+            combinations.push_back(curCombinations);
+            return;
+        } else if (sum < target){
+            for (int i = start; i < candidates.size(); i++){
                 curCombinations.push_back(candidates[i]);
                 backtrack(candidates, target, sum + candidates[i], curCombinations, i);
                 curCombinations.pop_back();
@@ -34,4 +33,4 @@ public:
 // consider duplicates by passing i + 1 or i depending on solution method
 
 // solution 1: for loop in else case, pass i 
-// solution 2: everything in for loop
+// solution 2: don't need for loop, just use i
