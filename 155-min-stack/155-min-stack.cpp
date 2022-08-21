@@ -1,6 +1,6 @@
 class MinStack {
 public:
-    stack<int> st, mn;
+    stack<pair<int, int>> st;
     int curMin;
     
     MinStack() {
@@ -8,22 +8,20 @@ public:
     }
     
     void push(int val) {
-        mn.push(curMin);
-        st.push(val);
+        st.push({val, curMin});
         curMin = min(curMin, val);
     }
     
     void pop() {
-        int n = st.top();
+        int n = st.top().first;
         if (n == curMin){
-            curMin = mn.top();
+            curMin = st.top().second;
         }
         st.pop();
-        mn.pop();
     }
     
     int top() {
-       return st.top(); 
+       return st.top().first; 
     }
     
     int getMin() {
