@@ -4,7 +4,7 @@ public:
         stack<int> nums;
         for(string token: tokens){
             if (token != "+" && token != "-" && token != "*" && token != "/"){
-                int n = stoi(token);
+                int n = stoi(token); // O(1)?
                 nums.push(n);
             } else {
                 int first = nums.top();
