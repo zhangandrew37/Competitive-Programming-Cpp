@@ -10,12 +10,32 @@
  */
 class Solution {
 public:
+    
     ListNode* reverseList(ListNode* head) {
-        ListNode *res = nullptr;
+        ListNode *prev = nullptr;
+        
+        while (head){
+            ListNode* tmp = head->next;
+            head->next = prev;
+            prev = head;
+            head = tmp;
+        }
+        return prev;
+    }
+};
+
+/*
+// iterative: 
+
+ListNode* reverseList(ListNode* head) {
+        ListNode *prev = nullptr;
+        ListNode *curr = head;
+        
         while (head){
             res = new ListNode(head->val, res);
             head = head->next;
         }
         return res;
     }
-};
+    
+*/
