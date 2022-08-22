@@ -9,11 +9,10 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        ListNode *ptr = head;
-        while (ptr && ptr->next){
-            if (ptr->next->val == INT_MAX) return true;
-            ptr->val = INT_MAX;
-            ptr = ptr->next;
+        while (head && head->next){
+            if (head->next->val == INT_MAX) return true;
+            head->val = INT_MAX;
+            head = head->next;
         }
         
         return false;
