@@ -7,7 +7,7 @@ public:
         
         while (r < s.length()){
             if (freq[s[r]] != 0){
-                while (l <= r && s[l] != s[r]){
+                while (s[l] != s[r]){
                     freq[s[l]]--;
                     l++;
                 }
