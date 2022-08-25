@@ -5,7 +5,7 @@ public:
         int l = 0, r = 0;
         unordered_map<char, int> freq;
         
-        while (r < s.length()){
+        for (int r = 0; r < s.length(); r++){
             if (freq[s[r]] != 0){
                 while (s[l] != s[r]){
                     freq[s[l]]--;
@@ -17,7 +17,6 @@ public:
             
             maxlen = max(maxlen, r - l + 1);
             freq[s[r]]++;
-            r++;
         }
         
         return maxlen;
