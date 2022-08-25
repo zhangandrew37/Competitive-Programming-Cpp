@@ -33,3 +33,5 @@ public:
         return (int) ans;
     }
 }; 
+
+// why dont you need to check for bounds?
