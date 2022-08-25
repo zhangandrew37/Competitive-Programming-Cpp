@@ -1,28 +1,41 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        // frequency array + sliding window approach:
-        // if character not in frq, frq[char]++;
+        int maxlen = 0;
+        int l = 0, r = 0;
+        unordered_map<char, int> freq;
         
-        int frq[256];
-        memset(frq, 0, sizeof(frq));
-        
-        int l = 0, len = s.length(), res = 0;
-        for (int r = 0; r < len; r++) {
-            frq[s[r]]++;
-            
-            //condition: want that frq[s[r] is <= 1
-                // otherwise, get rid of chars from start one by one until frq = 1
-                // increment left by 1 each char u get rid of
-                // also decrease frq of that char
-            //update res = max (res, curSubstringLength) <-- r-l+1
-            while (frq[s[r]] > 1){
-                frq[s[l]]--;
+        while (r < s.length()){
+            if (freq[s[r]] != 0){
+                while (l <= r && s[l] != s[r]){
+                    freq[s[l]]--;
+                    l++;
+                }
+                freq[s[l]]--;
                 l++;
-            }
+            } 
             
-            res = max(res, r-l+1);
+            maxlen = max(maxlen, r - l + 1);
+            freq[s[r]]++;
+            r++;
         }
-        return res;
+        
+        return maxlen;
     }
 };
+
+// dvdf
+// l
+//   r
+
+// pwwkew
+// l
+//   r
+
+// babbab
+//  l
+//    r
+
+// cur: 1
+// max: 1
+// chars: a, b, c 
