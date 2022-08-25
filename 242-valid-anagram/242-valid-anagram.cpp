@@ -10,7 +10,7 @@ public:
         }
         
         for (auto c: freqS){
-            if (c.second != freqT[c.first]) return false;
+            if (freqS[c.first] != freqT[c.first]) return false;
         }
 
         return true;
