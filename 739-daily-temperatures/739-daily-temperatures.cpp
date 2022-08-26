@@ -4,19 +4,16 @@ public:
         // we want the next greater than
         int len = temperatures.size();
         vector<int> answer(len, 0);
-        stack<int> nextWarmer; // monotonic decreasing
-        stack<int> indexes; // could make these 2 into a pair (still ensure clarity)
+        stack<int> nextWarmerIndices; // monotonic decreasing
         
         for (int i = 0; i < len; i++){
-            while (!nextWarmer.empty() && temperatures[i] > nextWarmer.top()){
-                int popIndex = indexes.top();
+            while (!nextWarmerIndices.empty() && temperatures[i] > temperatures[nextWarmerIndices.top()]){
+                int popIndex = nextWarmerIndices.top();
                 answer[popIndex] = i - popIndex;
-                nextWarmer.pop();
-                indexes.pop();
+                nextWarmerIndices.pop();
             }
             
-            nextWarmer.push(temperatures[i]);
-            indexes.push(i);
+            nextWarmerIndices.push(i);
             
         }
         
