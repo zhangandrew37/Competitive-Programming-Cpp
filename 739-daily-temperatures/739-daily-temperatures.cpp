@@ -5,7 +5,7 @@ public:
         int len = temperatures.size();
         vector<int> answer(len, 0);
         stack<int> nextWarmer; // monotonic decreasing
-        stack<int> indexes; // could make these 2 into a pair
+        stack<int> indexes; // could make these 2 into a pair (still ensure clarity)
         
         for (int i = 0; i < len; i++){
             while (!nextWarmer.empty() && temperatures[i] > nextWarmer.top()){
