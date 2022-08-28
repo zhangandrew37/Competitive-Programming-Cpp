@@ -15,12 +15,11 @@ public:
         if (!root) return 0;
         int left = dfsHeight(root->left);
         int right = dfsHeight(root->right);
-        if (left == -1 || right == -1 || abs(right - left) > 1) return -1;
-        return max(left, right) + 1;
+        if (left == -1 || right == -1 || abs(right - left) > 1) return -1; // left, right, current balanced?
+        return max(left, right) + 1; // height of current node
     }
     
     bool isBalanced(TreeNode* root) {
-        if (!root) return true;
         return dfsHeight(root) != -1;
     }
 };
