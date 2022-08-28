@@ -11,15 +11,16 @@
  */
 class Solution {
 public:
-    int treeHeight(TreeNode* node){
-        if (!node) return 0;
-        return 1 + max(treeHeight(node->left), treeHeight(node->right));
+    int dfsHeight(TreeNode* root){
+        if (!root) return 0;
+        int left = dfsHeight(root->left);
+        int right = dfsHeight(root->right);
+        if (left == -1 || right == -1 || abs(right - left) > 1) return -1;
+        return max(left, right) + 1;
     }
     
     bool isBalanced(TreeNode* root) {
         if (!root) return true;
-        int left = treeHeight(root->left);
-        int right = treeHeight(root->right);
-        return abs(right - left) <= 1 && isBalanced(root->left) && isBalanced(root->right);
+        return dfsHeight(root) != -1;
     }
 };
