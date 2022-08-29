@@ -43,7 +43,6 @@ public:
     
     
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        TreeNode* ans;
         // find p, add to unordered set
         searchP(root, p);
         // find q, add to stack
@@ -58,6 +57,6 @@ public:
             } 
             qStack.pop();
         }
-        return ans;
+        return nullptr;
     }
 };
