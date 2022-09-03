@@ -5,8 +5,8 @@ public:
         int high = nums.size() - 1;
         
         while (low <= high){
-            int m = low + (high - low) / 2;
-            if (nums[m] == target) {
+            int m = low + (high - low) / 2; // int overflow
+            if (nums[m] == target){
                 return m;
             } else if (nums[m] < target){
                 low = m + 1;
@@ -14,7 +14,7 @@ public:
                 high = m - 1;
             }
         }
-                
+        
         return -1;
         
     }
