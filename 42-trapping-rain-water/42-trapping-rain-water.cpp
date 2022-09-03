@@ -12,12 +12,12 @@ public:
         while (l < r){
             if (maxLeft <= maxRight){
                 l++;
-                sum += max(0, maxLeft - height[l]);
                 maxLeft = max(maxLeft, height[l]);
+                sum += maxLeft - height[l];
             } else {
                 r--;
-                sum += max(0, maxRight - height[r]);
                 maxRight = max(maxRight, height[r]);
+                sum += maxRight - height[r];
             }
         }
         
