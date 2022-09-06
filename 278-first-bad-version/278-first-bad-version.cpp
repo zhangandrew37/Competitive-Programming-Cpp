@@ -8,7 +8,7 @@ public:
         if (isBadVersion(1)) return 1;
         
         int l = 2;
-        int r = n;
+        int r = n - 1;
                 
         while (l <= r){
             int m = l + (r - l)/2;
