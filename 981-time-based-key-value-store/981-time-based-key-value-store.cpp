@@ -12,18 +12,20 @@ public:
     string get(string key, int timestamp) {
         if (tm[key].empty()) return ""; // no values
         int l = 0;
-        int r = tm[key].size();
+        int r = tm[key].size() - 1;
         // binary search
-        while (l < r){
+        while (l <= r){
             int m = l + (r - l)/2;
+            if (tm[key][m].first == timestamp) return tm[key][m].second;
+                
             if (tm[key][m].first > timestamp){
-                r = m;
+                r = m - 1;
             } else {
                 l = m + 1;
             }
         }
-        if (l == 0) return "";
-        return tm[key][l-1].second;
+        if (r < 0) return "";
+        return tm[key][r].second;
     }
 };
 
