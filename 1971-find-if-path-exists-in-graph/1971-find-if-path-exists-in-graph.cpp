@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
-        vector<vector<int>> adjLists(n, vector<int>());
+        unordered_map<int, vector<int>> adjLists;
         vector<bool> visited(n, false);
         
         for (auto v : edges){
