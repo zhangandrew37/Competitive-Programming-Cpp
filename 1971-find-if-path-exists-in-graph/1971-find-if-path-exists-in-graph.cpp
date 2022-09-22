@@ -1,31 +1,23 @@
 class Solution {
 public:
+    vector<vector<int>> adj;
+    vector<bool> visited;
     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
-        unordered_map<int, vector<int>> adjLists;
-        vector<bool> visited(n, false);
-        
-        for (auto v : edges){
-            adjLists[v[0]].push_back(v[1]);
-            adjLists[v[1]].push_back(v[0]);
+        adj.resize(n);
+        for (auto edge: edges){
+            adj[edge[0]].push_back(edge[1]);
+            adj[edge[1]].push_back(edge[0]);
         }
-        
-        queue<int> queue;
-        queue.push(source);
-        visited[source] = true;
-        
-        while (!queue.empty()){
-            int cur = queue.front();
-            queue.pop();
-            if (cur == destination) return true;
-            
-            for (auto u : adjLists[cur]){
-                if (!visited[u]){
-                    visited[u] = true;
-                    queue.push(u);
-                }
-            }
+        visited.resize(n, false);
+        dfs(source, destination);
+        return visited[destination];
+    }
+    
+    void dfs(int cur, int destination) {
+        visited[cur] = true;
+        if (cur == destination) return;
+        for (auto nbr : adj[cur]){
+            if (!visited[nbr]) dfs(nbr, destination);
         }
-        
-        return false;
     }
 };
