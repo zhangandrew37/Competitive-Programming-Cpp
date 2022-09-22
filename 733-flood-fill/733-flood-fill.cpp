@@ -2,21 +2,30 @@ class Solution {
 public:
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
         //bfs
-        int rows=image.size(), cols=image[0].size(), oldColor=image[sr][sc];
-        if(color==oldColor) return image;
-        list<vector<int>> togo; togo.push_back({sr,sc});
+        int rows = image.size(), cols = image[0].size(), oldColor = image[sr][sc];
+        if (color == oldColor) return image;
+        
+        queue<vector<int>> queue; // technically just a pair
+        queue.push({sr, sc});
+        
         int dirs[4][2] = {{0,1},{0,-1},{1,0},{-1,0}};
-        while(togo.size()) {
-            int r=togo.front()[0], c=togo.front()[1]; togo.pop_front();
-            image[r][c]=color;
-            for(auto& d:dirs) {
-                int rr=r+d[0], cc=c+d[1];
-                if(rr<0 || rr>=rows ||cc<0 ||cc>=cols) continue; // keep togo safe
-                if(image[rr][cc]!=oldColor) continue;            // keep togo clean
-                togo.push_back({rr,cc});
+        
+        while (!queue.empty()){
+            int curRow = queue.front()[0];
+            int curCol = queue.front()[1];
+            queue.pop();
+            image[curRow][curCol] = color;
+            for(auto d : dirs){
+                int newRow = curRow + d[0];
+                int newCol = curCol + d[1];
+                if (newRow >= rows || newRow < 0 || newCol >= cols || newCol < 0 || 
+                    image[newRow][newCol] != oldColor) continue; //bounds/diff color
+                queue.push({newRow, newCol});
             }
         }
+        
         return image;
+        
         
     }
     
