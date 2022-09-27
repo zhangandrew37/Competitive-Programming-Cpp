@@ -7,7 +7,7 @@ public:
         
         // first make into adj list
         for(auto courses : prerequisites){
-            adj[courses[1]].push_back(courses[0]);
+            adj[courses[1]].push_back(courses[0]); // opp
             degree[courses[0]]++;
         }
         
