@@ -19,7 +19,8 @@ public:
         while (!q.empty() && cnt > 0){
 
             int sz = q.size();
-            while (sz-- > 0){
+            while (sz > 0){
+                sz--;
                 int r = q.front().first, c = q.front().second;
                 q.pop();
                 
