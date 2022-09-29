@@ -1,5 +1,6 @@
 class Solution {
 public:
+    //bfs
     vector<int> dirs = {0, 1, 0, -1 , 0};
     int numIslands(vector<vector<char>>& grid) {
         int rows = grid.size(), cols = grid[0].size();
