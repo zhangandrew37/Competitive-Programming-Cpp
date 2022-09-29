@@ -18,8 +18,8 @@ public:
         // bfs on all rotten simulaneously
         while (!q.empty() && cnt > 0){
 
-            int sz=q.size();
-            while (sz--){
+            int sz = q.size();
+            while (sz-- > 0){
                 int r = q.front().first, c = q.front().second;
                 q.pop();
                 
@@ -28,12 +28,10 @@ public:
                     if (newR < 0 || newC < 0 || newR >= rows || newC >= cols || grid[newR][newC] != 1) continue;
 
                     cnt--;
-                    cout << newR << " " << newC << " " << cnt << endl;
                     grid[newR][newC] = 2;
                     q.push({newR, newC});
                 }
             }
-            cout << cnt;
             mins++;
         }
         if (cnt == 0) return mins;
