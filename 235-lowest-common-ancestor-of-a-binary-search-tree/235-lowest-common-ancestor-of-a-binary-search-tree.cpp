@@ -12,34 +12,14 @@ class Solution {
 public:
     
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        stack<TreeNode*> stackP;
-        stack<TreeNode*> stackQ;
-        find(root, p, stackP);
-        find(root, q, stackQ);
-        TreeNode* ret = nullptr;
-        
-        while (!stackP.empty() && !stackQ.empty()){
-            if (stackP.top() != stackQ.top()) break;
-            ret = stackP.top();
-            stackP.pop();
-            stackQ.pop();
+        int small = min(p->val, q->val);
+        int large = max(p->val, q->val);
+        while (root){
+            if (root->val < small) return lowestCommonAncestor(root->right, p, q);
+            if (root->val > large) return lowestCommonAncestor(root->left, p, q);
+
+            return root;
         }
-        return ret;
-    }
-    // l n r 
-    bool find(TreeNode* root, TreeNode* n, stack<TreeNode*> &stack){
-        if (!root) return false;
-        if (root == n){
-            stack.push(root);
-            return true;
-        }
-        
-        if (find(root->left, n, stack) || find(root->right, n, stack)){
-            stack.push(root);
-            return true;
-        }
-        
-        return false;
-        
+        return nullptr;
     }
 };
