@@ -1,53 +1,80 @@
-class Solution {
-public:
-    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
-        unordered_map<string, set<string>> graph; // email to other emails under same name
-        unordered_map<string, string> emailToName;
-        
-        for (auto account : accounts){
-            string name = account[0];
-            for (int i = 1; i < account.size(); i++){ // build graph; connect everything to first node
-                string email = account[i];
-                graph[email].insert(account[1]);
-                graph[account[1]].insert(email);
-                
-                emailToName[email] = name;
-            }
+class UnionFind{
+    vector<int> parent;
+    vector<int> rank; // depth of each node
+public: 
+     int groupCount;
+     UnionFind(int n): groupCount(n) {
+         parent = vector<int>(n);
+         rank = vector<int>(n);
+     }
+    void init(int x){
+        parent[x] = x;
+    }
+    int find(int x){
+        if (parent[x] != x) parent[x] = find(parent[x]); //recursively find parent
+        return parent[x];
+    }
+    
+    void unify(int x, int y){
+        int xset = find(x);
+        int yset = find(y);
+        if (xset == yset) return; // same parent
+        groupCount--; // merged
+        if(rank[xset] < rank[yset]) parent[xset] = yset; // set parent of lower rank
+        else if (rank[xset] > rank[yset]) parent[yset] = xset;
+        else{
+            parent[yset] = xset;
+            rank[xset] = rank[yset] + 1;
         }
-        
-        vector<vector<string>> res;
-        set<string> visited;
-        
-        for (auto [email, val] : graph){
-            // dfs
-            if (visited.find(email) == visited.end()){
-                stack<string> stack;
-                stack.push(email);
-                visited.insert(email);
-                
-                vector<string> curRes;
-                curRes.push_back(emailToName[email]);
-                
-                while (!stack.empty()){
-                    string cur = stack.top();
-                    stack.pop();
-                    curRes.push_back(cur);
-                    for (auto edge : graph[cur]){
-                        if (visited.find(edge) == visited.end()){
-                            visited.insert(edge);
-                            stack.push(edge);
-                        }
-                    }
-                }
-                sort(curRes.begin() + 1, curRes.end());
-                res.push_back(curRes);
-            }
-        }
-        
-        return res;
     }
 };
 
-// n = # accounts, k = max number of emails per user
-// T: dfs * sort :  O(nk) * N log K -> O (n * k N nlogk)
-// S: graph: O(nk)
+class Solution {
+public:
+    vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
+        int accountsCount = accounts.size();
+        UnionFind uf(accountsCount);
+        
+        unordered_map<string, int> email2AccountIdx;
+        for (int i = 0; i < accountsCount; i++){
+            uf.init(i);
+            auto &account = accounts[i];
+            for(int j = 1; j < account.size(); j++){
+                string &email = account[j];
+                auto iter = email2AccountIdx.find(email);
+                if (iter == email2AccountIdx.end()){
+                    email2AccountIdx[email] = i;
+                } else{
+                    uf.unify(i, iter->second);
+                }
+            }
+            
+        }
+        
+        int mergedAccountsCount = uf.groupCount;
+        vector<vector<string>> mergedAccounts(mergedAccountsCount);
+        unordered_map<int, int> groupId2Idx;
+        int nextIdx = 0;
+        for (auto &pair : email2AccountIdx){
+            const string &email = pair.first;
+            int groupId = uf.find(pair.second);
+            auto iter = groupId2Idx.find(groupId);
+            if (iter == groupId2Idx.end()){
+                groupId2Idx[groupId] = nextIdx;
+                string &name = accounts[groupId][0];
+                mergedAccounts[nextIdx].push_back(name);
+                mergedAccounts[nextIdx].push_back(email);
+                nextIdx++;
+            } else{
+                mergedAccounts[iter->second].push_back(email);
+            }
+        }
+        
+        for (int i = 0; i < mergedAccountsCount; i++){
+            vector<string> &emailVec = mergedAccounts[i];
+            sort(emailVec.begin() + 1, emailVec.end());
+        }
+        return mergedAccounts;
+        
+    }
+};
