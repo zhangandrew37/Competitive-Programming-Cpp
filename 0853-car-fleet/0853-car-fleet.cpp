@@ -8,10 +8,6 @@ public:
             fleets[position[i]] = (target-position[i])/(double)speed[i];
         }
         
-        for (auto [pos, time] : fleets){
-            cout << pos << " " << time << endl;
-        }
-        
         for (auto &[pos, time] : fleets){
             while (!st.empty() && time >= st.top()) {
                 st.pop();
@@ -67,6 +63,6 @@ ex.2
 [6,8]
 [3,2]
 
-
+approach 3 : don't need stack, just keep track of cnt, cur
 
 */
