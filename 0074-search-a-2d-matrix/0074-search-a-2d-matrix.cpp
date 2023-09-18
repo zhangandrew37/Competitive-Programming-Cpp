@@ -1,26 +1,26 @@
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        int rL = 0, cL = 0, cR = matrix.size() - 1, rR = matrix[0].size() - 1;
+        int rL = 0, cL = 0, rR = matrix.size() - 1, cR = matrix[0].size() - 1;
         
-        // find col range ; returns cL such that cL is first one less than target
+        // find row range ; returns rL such that rL is first one less than target
         
-        while (cL < cR){
-            int m = (cL + cR + 1) / 2;
+        while (rL < rR){
+            int m = (rL + rR + 1) / 2;
             if (matrix[m][0] <= target){
-                cL = m;
+                rL = m;
             } else {
-                cR = m - 1;
+                rR = m - 1;
             }
         }
     
-        // find row range
+        // find col range
         
-        while (rL <= rR){
-            int m = (rL + rR) / 2;
-            if (matrix[cL][m] == target) return true;
-            else if (matrix[cL][m] < target) rL = m + 1;
-            else rR = m - 1;
+        while (cL <= cR){
+            int m = (cL + cR) / 2;
+            if (matrix[rL][m] == target) return true;
+            else if (matrix[rL][m] < target) cL = m + 1;
+            else cR = m - 1;
         }
         
         return false;
