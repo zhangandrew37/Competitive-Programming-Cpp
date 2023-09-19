@@ -14,29 +14,37 @@ public:
         if (!list1) return list2;
         if (!list2) return list1;
         
-        ListNode* trav = new ListNode();
-        ListNode* res = trav;
-        
-        while (list1 && list2){
-            if (list1->val < list2->val) {
-                trav->next = list1;
-                list1 = list1->next;
-            }
-            else {
-                trav->next = list2;
-                list2 = list2->next;
-            }
-            trav = trav->next;
+        if (list1->val < list2->val){
+            list1->next = mergeTwoLists(list1->next, list2);
+            return list1;
+        } else {
+            list2->next = mergeTwoLists(list1, list2->next);
+            return list2;
         }
         
-        if (!list1){
-            trav->next = list2;
-        }
+//         ListNode* trav = new ListNode();
+//         ListNode* res = trav;
         
-        if (!list2){
-            trav->next = list1;
-        }
+//         while (list1 && list2){
+//             if (list1->val < list2->val) {
+//                 trav->next = list1;
+//                 list1 = list1->next;
+//             }
+//             else {
+//                 trav->next = list2;
+//                 list2 = list2->next;
+//             }
+//             trav = trav->next;
+//         }
         
-        return res->next;
+//         if (!list1){
+//             trav->next = list2;
+//         }
+        
+//         if (!list2){
+//             trav->next = list1;
+//         }
+        
+//         return res->next;
     }
 };
