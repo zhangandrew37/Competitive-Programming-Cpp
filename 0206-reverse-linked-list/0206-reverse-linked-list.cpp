@@ -14,9 +14,10 @@ public:
         ListNode* res = nullptr;
         
         while (head){
-            ListNode* tmp = res;
-            res = new ListNode(head->val, tmp);
-            head = head->next;
+            ListNode* next = head->next;
+            head->next = res;
+            res = head;
+            head = next;
         }
         
         return res;
