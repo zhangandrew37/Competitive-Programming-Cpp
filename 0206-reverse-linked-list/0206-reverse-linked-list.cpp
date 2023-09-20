@@ -12,28 +12,25 @@ class Solution {
 public:
     
     ListNode* reverseList(ListNode* head) {
-        ListNode* res = nullptr;
+        ListNode *next, *pre = nullptr;
         
         while (head){
-            ListNode* next = head->next;
-            head->next = res;
-            res = head;
+            next = head->next;
+            head->next = pre;
+            pre = head;
             head = next;
         }
         
-        return res;
+        return pre;
     }
 };
 
 /*
 
 1 -> 2 -> 3 -> 4 -> 5 -> null
-head
+   head
 
-res = null
-
-res = new ListNode(head->val, res)
-head = head->next
+pre: 0 -> 2 -> 1
 
 1 -> nullptr > 1 -> 2 -> ...
 
